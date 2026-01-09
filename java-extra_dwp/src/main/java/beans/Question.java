@@ -179,7 +179,7 @@ public class Question implements Serializable {
         return "";
     }
   }
-
+  // OSコードを文字列に変換するメソッド
   private String toOsText(String os) {
     switch (os) {
       case "win":
