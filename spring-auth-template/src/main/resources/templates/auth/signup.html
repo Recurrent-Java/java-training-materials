@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head>
+  <div th:replace="~{comlayout/base :: meta}"></div>
+  <div th:replace="~{comlayout/base :: styles}"></div>
+  <title>会員登録ページ</title>
+</head>
+
+<body>
+  <div th:replace="~{comlayout/base :: header}"></div>
+  <div th:replace="~{comlayout/base :: nav}"></div>
+  <main id="regist">
+    <h2>会員登録</h2>
+    <form th:action="@{/signup}" th:object="${signupForm}" method="post">
+      <div th:if="${errList}">
+        <ul>
+          <li th:each="errMsg : ${errList}" th:text="${errMsg}"></li>
+        </ul>
+      </div>
+      <p><label for="name">名前<span class="badge">必須</span>：</label><input type="text" th:field="*{name}" id="name" placeholder="福岡　太郎"></p>
+      <p>
+        <label for="email">メールアドレス<span class="badge">必須</span>：</label>
+        <input type="text" th:field="*{email}" id="email" placeholder="taro.fukuoka@example.com">
+      </p>
+      <p>
+        <label for="password">パスワード<span class="badge">必須</span>：</label>
+        <input type="password" th:field="*{password}" autocomplete="new-password" id="password" placeholder="8文字以上で設定してください。">
+      </p>
+      <p><label for="passwordConfirmation">パスワード（確認用）<span class="badge">必須</span>：</label>
+        <input type="password" th:field="*{passwordConfirmation}" autocomplete="new-password" id="passwordConfirmation" placeholder="8文字以上で設定してください。">
+      </p>
+      <p class="cntbtn">
+        <button type="submit">確認</button>
+      </p>
+    </form>
+  </main> 
+</body>
+</html>
