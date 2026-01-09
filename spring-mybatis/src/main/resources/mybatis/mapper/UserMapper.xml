@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.recurrent.spring_mybatis.mapper.UserMapper">
+
+	<!-- ResultMapの定義 -->
+	<resultMap id="userResultMap" type="com.recurrent.spring_mybatis.entity.User">
+		<id property="id" column="id" />
+		<result property="name" column="name" />
+		<result property="email" column="email" />
+		<result property="password" column="password" />
+		<result property="roleId" column="role_id" />  <!-- ★外部キー -->
+		<result property="enabled" column="enabled" />
+		<result property="createdAt" column="created_at" />
+		<result property="updatedAt" column="updated_at" />
+		<!-- ★追加：Roleオブジェクトのマッピング -->
+		<association property="role" javaType="com.recurrent.spring_mybatis.entity.Role">
+			<id property="id" column="id" />
+			<result property="name" column="name" />
+		</association>
+	</resultMap>
+
+	<!-- メールアドレスでユーザーを検索（ログイン時に使用） -->
+	<select id="findByEmail" resultMap="userResultMap">
+		SELECT
+		  u.id
+		, u.name
+		, u.email
+		, u.password
+		, u.role_id
+		, u.enabled
+		, u.created_at
+		, u.updated_at
+		, r.id      <!-- ★RoleのIDを取得 -->
+		, r.name    <!-- ★Role名を取得 -->
+		FROM
+		  users u
+    LEFT JOIN
+      roles r 
+    ON 
+      u.role_id = r.id  <!-- ★Rolesテーブル -->
+		WHERE 
+		  u.email = #{email}
+	</select>
+
+	<!-- IDでユーザーを検索 -->
+	<select id="findById" resultMap="userResultMap">
+		SELECT id, name, email, password, role, enabled, created_at, updated_at
+		FROM users
+		WHERE id = #{id}
+	</select>
+
+	<!-- ユーザー名でユーザーを検索 -->
+	<select id="findByName" resultMap="userResultMap">
+		SELECT id, name, email, password, role, enabled, created_at, updated_at
+		FROM users
+		WHERE name = #{name}
+	</select>
+
+	<!-- 全ユーザーを取得 -->
+	<select id="findAll" resultMap="userResultMap">
+		SELECT id, name, email, password, role, enabled, created_at, updated_at
+		FROM users
+		ORDER BY created_at DESC
+	</select>
+
+	<!-- ユーザーを新規登録 -->
+	<!-- useGeneratedKeys="true"はAUTO_INCREMENTで自動採番する -->
+	<!-- keyProperty="id"は自動採番した値をカラム：idにセットして -->
+	<insert id="insert" useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO users (
+		  name
+		, email
+		, password
+		, role_id
+		, enabled
+		, created_at
+		, updated_at
+		)	VALUES (
+		  #{name}
+		, #{email}
+		, #{password}
+		, #{roleId}
+		, #{enabled}
+		, #{createdAt}
+		, #{updatedAt}
+		)
+	</insert>
+
+	<!-- ユーザー情報を更新 -->
+	<update id="update">
+		UPDATE users
+		SET name = #{name},
+		email = #{email},
+		password = #{password},
+		role = #{role},
+		enabled = #{enabled},
+		updated_at = NOW()
+		WHERE id = #{id}
+	</update>
+
+	<!-- ユーザーを削除 -->
+	<delete id="delete">
+		DELETE FROM users WHERE id = #{id}
+	</delete>
+
+	<!-- メールアドレスの重複チェック -->
+	<select id="countByEmail" resultType="int">
+		SELECT COUNT(*)
+		FROM users
+		WHERE email = #{email}
+	</select>
+
+</mapper>

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.recurrent.spring_mybatis.mapper.TodoMapper">
+  <!-- ResultMapの定義 -->
+  <resultMap id="todoResultMap" type="com.recurrent.spring_mybatis.entity.Todo">
+    <id property="id" column="id" />
+    <result property="taskName" column="task_name" />
+    <result property="completed" column="completed" />
+  </resultMap>
+  <!-- ToDoリストを取得 -->
+  <select id="findAll" resultMap="todoResultMap">
+    SELECT
+      id
+    , task_name
+    , completed
+    FROM
+      todos
+    WHERE
+      completed = false
+  </select>
+  <!-- タスクを終了させる -->
+ <update id="deleteByIds">
+    UPDATE todos
+    SET completed = true
+    WHERE id IN
+    <foreach collection="ids"
+             item="id"
+             open="("
+             separator=","
+             close=")">
+      #{id}
+    </foreach>
+  </update>
+  <!-- タスクを登録する -->
+  <insert id="insert" 
+    parameterType="com.recurrent.spring_mybatis.entity.Todo"
+    useGeneratedKeys="true" keyProperty="id">
+    INSERT INTO todos (
+      task_name
+    , completed
+    ) VALUES (
+      #{taskName}
+    , #{completed}
+    )
+  </insert> 
+</mapper>

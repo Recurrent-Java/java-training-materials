@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head>
+  <div th:replace="~{comlayout/base :: meta}"></div>
+  <div th:replace="~{comlayout/base :: styles}"></div>
+
+  <title>Todoリスト</title>
+</head>
+
+<body data-page="todo">
+  <div th:replace="~{comlayout/base :: header}"></div>
+  <div th:replace="~{comlayout/base :: nav}"></div>
+  <main id="todo">
+    <h2>ToDoリスト</h2>
+    <form id="todo-form">
+      <p><input type="text" name="task" id="task" placeholder="新しいタスクを入力"></p>
+      <p><button type="button" id="add-task">追加</button></p>
+    </form>
+    <hr>
+    <!-- Todoリスト表示エリア -->
+    <form id="todo-list-form">
+      <ul id="todo-list">
+        <!-- ここにJavaScriptでTodoアイテムが挿入される -->
+      </ul>
+      <hr>
+      <p><button type="button" id="clear-completed">完了したタスクをクリア</button></p>
+    </form>
+  </main>
+  <div th:replace="~{comlayout/base :: footer}"></div>
+  <!-- ここにページ固有のJavaScriptを記述 -->
+  <script th:src="@{/js/todo.js}" defer></script>
+  
+</body>
+
+</html>

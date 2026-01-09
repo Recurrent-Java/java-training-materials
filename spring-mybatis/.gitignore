@@ -1,0 +1,114 @@
+##############################
+# Java / Eclipse / IntelliJ 共通
+##############################
+
+# ビルド成果物
+/target/
+/out/
+/bin/
+/build/
+
+# 一時・キャッシュ
+*.log
+*.tmp
+*.bak
+*.swp
+
+# Java ビルド生成物
+*.class
+*.jar
+*.war
+*.ear
+
+# IDE / プロジェクトファイル（Eclipse 設定はチームで共有するため追跡する想定）
+# NOTE: チーム方針により .settings と以下はコミットするため ignore しません
+#.settings/
+#.project
+#.classpath
+
+# IntelliJ は個人環境向けに除外
+.idea/
+*.ipr
+*.iws
+*.iml
+
+##############################
+# OS依存ファイル
+##############################
+# mac
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Windows
+Thumbs.db
+desktop.ini
+
+# Linux / 一時ファイル
+*~
+
+##############################
+# Maven / Gradle
+##############################
+# Maven wrapper はコミット推奨（CI で同じ wrapper を使えるようにするため）
+# ただし環境依存の設定は除外
+.mvn/jvm.config
+
+# Maven ビルド結果（念のため）
+**/target/
+
+# Gradle キャッシュ / ビルド（プロジェクトに Gradle が混在する場合に備えて）
+.gradle/
+**/build/
+
+##############################
+# Spring Boot
+##############################
+# Devtools が生成するファイル
+.spring-boot-devtools.properties
+.spring-boot-devtools.json
+
+# 組み込み DB（H2 等）
+*.db
+*.h2.db
+*.mv.db
+
+# application のローカル環境用設定（リポジトリに含めない）
+application-local.properties
+application-dev.properties
+application-test.properties
+
+##############################
+# DWP（一般的な Java ベースの DWP 想定）
+##############################
+# DWP プロジェクトでよくある一時ファイル / ビルド成果物を包括的に排除
+/target/
+/build/
+/dist/
+/out/
+/tmp/
+*.cache
+
+##############################
+# Node / Frontend（必要な場合）
+##############################
+node_modules/
+dist/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+##############################
+# その他（資格情報・鍵など）
+##############################
+.env
+*.env
+*.key
+*.pem
+*.p12
+*.crt
+
+# カバレッジ / テスト結果
+coverage/
+*.lcov
+test-results/

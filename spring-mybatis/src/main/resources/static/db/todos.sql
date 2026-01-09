@@ -1,0 +1,6 @@
+/* todosテーブル */
+CREATE TABLE IF NOT EXISTS todos (
+   id INT AUTO_INCREMENT PRIMARY KEY,
+   task_name VARCHAR(255) NOT NULL,
+   completed TINYINT(1) NOT NULL DEFAULT 0
+);
