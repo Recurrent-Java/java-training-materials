@@ -1,0 +1,191 @@
+@charset "UTF-8";
+
+/* 共通設定
+-------------------------------------------*/
+:root {
+  /* 文字色 */
+  --text-color-black: #000;
+  --text-color-gray: #666;
+  --text-color-dimgray: #999;
+  --text-color-danger: #f00;
+  --text-color-white: #fff;
+  /* ボーダー色 */
+  --boder-color-gray: #666;
+  /* 背景色 */
+  --bg-color-danger: #f00;
+  /* フォントの種類 */
+  --font-family-sans-serif: "Source Sans Pro", "Hiragino Kaku Gothic ProN", "メイリオ", "Meiryo", "Arial", sans-serif;
+}
+
+html {
+  font-size: 62.5%;  /* ルートのサイズ 0.625 * 16px = 10px */
+}
+
+body {
+  color: var(--text-color-gray);
+  font-size: 1.6rem;  /* ルートのサイズ * 1.6 = 16px */
+  font-family: var(--font-family-sans-serif);
+}
+
+header {
+  width: 680px;
+  margin-inline: auto;
+  /* 上マージン:30px、下マージン:20px */
+  margin-top: 30px;
+  margin-bottom: 20px;
+
+}
+
+main {
+  width: 680px;
+  margin-inline: auto;
+}
+
+h1 {
+  margin-bottom: 20px;
+  /* 文字サイズ32px固定 */
+  font-size: 32px;
+  /* 文字を中央寄せ */
+  text-align: center;
+
+}
+button {
+  display: block;
+  width: 100px;
+  height: 1.8em;
+  margin-inline: auto;
+  border: 1px solid var(--boder-color-gray);
+  line-height: 1.8em;
+}
+.cntbtn {
+  display: flex;
+  justify-content: space-between;
+  width: 300px;
+  margin-inline: auto;
+}
+.badge {
+  margin-left: 5px;
+  padding: 5px;
+  background-color: var(--bg-color-danger);
+  border-radius: 5px;
+  font-size: 1rem;
+  font-weight: bold;
+  color: var(--text-color-white);
+  
+}
+/* 登録フォームの設定
+-------------------------------------------*/
+main#regist {
+  form {
+    padding: 20px;
+    border: 1px solid var(--boder-color-gray);
+    box-sizing: border-box;
+  }
+  input[type="text"] {
+    /* 高さを1.5文字分に設定 */
+    height: 1.5em;
+    border: 1px solid var(--boder-color-gray);
+    /* 高さを設定し、行間を高さと同一にすると縦位置中央に配置される */
+    line-height: 1.5em;
+  }
+  input[type="tel"] {
+    width: 3em;
+    height: 1.5em;
+    border: 1px solid var(--boder-color-gray);
+    /* 高さを設定し、行間を高さと同一にすると縦位置中央に配置される */
+    line-height: 1.5em;
+  }
+  input[type="radio"]{
+    margin-top: -2px;
+    vertical-align: middle;
+  }
+  select {
+    width: 100px;
+    height: 1.8em;
+    border: 1px solid var(--boder-color-gray);
+  }
+
+  p {
+    margin-bottom: 20px;
+  }
+  ul {
+    margin-bottom: 20px;
+    margin-left: 20px;
+    color:var(--text-color-danger);
+  }
+  li {
+    margin-bottom: 5px;
+  }
+}
+/* 登録確認画面の設定
+-------------------------------------------*/
+main#confirm {
+  h2 {
+    margin-bottom: 20px;
+    margin-left: 80px;
+    /* 文字サイズ24px固定 */
+    font-size: 24px;
+    /* 文字を左寄せ */
+    text-align: left;
+  }
+  table {
+    width: 500px;
+    margin-inline: auto;
+    margin-bottom: 20px;
+    border: 1px solid var(--boder-color-gray);
+  }
+  table th {
+    width: 150px;
+    height: 40px;
+    padding: 5px;
+    border: 1px solid var(--boder-color-gray);
+    vertical-align: middle;
+    box-sizing: border-box;
+  }
+  table td {
+    width: 350px;
+    padding: 5px;
+    border: 1px solid var(--boder-color-gray);
+    vertical-align: middle;
+    box-sizing: border-box;
+  }
+  div {
+    padding: 0 20px;
+    box-sizing: border-box;
+  }
+}
+/* 登録完了画面の設定
+-------------------------------------------*/
+main#completed {
+  h2 {
+    margin-bottom: 20px;
+    /* 文字サイズ24px固定 */
+    font-size: 24px;
+    /* 文字を中央寄せ */
+    text-align: center;
+  }
+  button {
+    width: 250px;
+  }
+}
+/* エラー画面の設定
+-------------------------------------------*/
+main#error {
+  h2 {
+    margin-bottom: 20px;
+    color: var(--text-color-danger);
+    /* 文字サイズ24px固定 */
+    font-size: 24px;
+    /* 文字を中央寄せ */
+    text-align: center;
+  }
+  p {
+    margin-bottom: 40px;
+    color: var(--text-color-danger);
+    /* 文字を中央寄せ */
+    text-align: center;
+  }
+  button {
+    width: 250px;
+  }
+}

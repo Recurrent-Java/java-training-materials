@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+  <div th:replace="~{comlayout/base :: meta}"></div>
+  <div th:replace="~{comlayout/base :: styles}"></div>
+  <title>校内利用者登録ページ</title>
+</head>
+<body>
+  <div th:replace="~{comlayout/base :: header}"></div>
+  <main id="regist">
+    <form th:action="@{/confirm}" th:object="${member}" method="post">
+      <div th:if="${errList}">
+        <ul>
+          <li th:each="errMsg : ${errList}" th:text="${errMsg}"></li>
+        </ul>
+      </div>
+      <!-- ${#fields.hasAnyErrors()} で全てのエラーの有無をチェック -->
+      <!-- エラーメッセージのソートが不要な場合は下記の方法でも可
+      <div th:if="${#fields.hasAnyErrors()}">
+          <ul>
+              <li th:each="errMsg : ${#fields.allErrors}" th:text="${errMsg}"></li>
+          </ul>
+      </div>
+      -->
+      <p><label for="name">名前<span class="badge">必須</span>：</label><input type="text" th:field="*{name}" id="name"></p>
+      <p><label for="age">年齢<span class="badge">必須</span>：</label><input type="tel" th:field="*{age}" id="age">
+      </p>
+      <p>性別<span class="badge">必須</span>：
+        <input type="radio" th:field="*{gender}" value="male" id="male">
+        <label for="male">男性</label>
+
+        <input type="radio" th:field="*{gender}" value="female" id="female">
+        <label for="female">女性</label>
+
+        <input type="radio" th:field="*{gender}" value="other" id="other">
+        <label for="other">その他</label>
+      </p>
+      <p><label>区分<span class="badge">必須</span>：</label>
+        <select th:field="*{role}">
+          <option value="0" hidden>---- 選択 ----</option>
+          <option value="1">管理者</option>
+          <option value="2">講師</option>
+          <option value="3">受講生</option>
+        </select>
+
+      </p>
+      <p>ご利用のサービス：
+        <input type="checkbox" th:field="*{services}" value="1" id="mail">
+        <label for="mail">メール</label>
+
+        <input type="checkbox" th:field="*{services}" value="2" id="chat">
+        <label for="chat">チャット</label>
+
+        <input type="checkbox" th:field="*{services}" value="3" id="portal">
+        <label for="portal">ポータル</label>
+      </p>
+      <p>メール配信希望：
+        <input type="radio" th:field="*{mailFlg}" value="yes" id="yes">
+        <label for="yes">希望する</label>
+
+        <input type="radio" th:field="*{mailFlg}" value="no" id="no">
+        <label for="no">希望しない</label>
+      </p>
+      <p class="cntbtn">
+        <button type="button" th:onclick="|location.href='@{/}'|">
+          取り消し
+        </button>
+        <button type="submit">確認</button>
+      </p>
+    </form>
+  </main>
+</body>
+</html>
